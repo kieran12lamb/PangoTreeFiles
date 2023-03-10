@@ -150,7 +150,7 @@ function build_tree(node_dataframe,extend=Dict{String,Dict{String,Any}}(),annota
     tree_dict = extend
     for lineage_row in eachrow(node_dataframe)
         
-        estimated_lineage_count = NaN
+        estimated_lineage_count = 0
         if nrow(annotations) != 0
             lineage_annotation = filter(:Lineage => n -> n == lineage_row["Alias"], annotations)
             if nrow(lineage_annotation) != 0
