@@ -337,3 +337,5 @@ end
 open("/home4/2191618l/Github/PangoTreeFiles/recombinant_graphs.json","w") do f
     JSON.print(f,graph)
 end
+
+variables =  Dict{String,Any}("max_estimated_count"=>node_row.Alias)
