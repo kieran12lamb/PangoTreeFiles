@@ -187,6 +187,9 @@ function build_tree(node_dataframe,extend=Dict{String,Dict{String,Any}}(),annota
 end
 # cd("/home4/2191618l/Github/PangoTreeFiles/")
 
+cog_metadata_url = "https://cog-uk.s3.climb.ac.uk/phylogenetics/latest/cog_metadata.csv.gz"
+download(cog_metadata_url,"/home4/2191618l/Github/PangoTreeFiles/cog_metadata.csv.gz")
+
 
 cog_uk = DataFrame(CSV.File("/home4/2191618l/Github/Pango_Tree/cog_metadata.csv",delim=","))
 println("Lineage Meta Counts Loaded")
