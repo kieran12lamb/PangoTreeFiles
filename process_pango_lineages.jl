@@ -185,10 +185,10 @@ function build_tree(node_dataframe,extend=Dict{String,Dict{String,Any}}(),annota
     end
     return tree_dict
 end
+# cd("/home4/2191618l/Github/PangoTreeFiles/")
 
 
-
-cog_uk = DataFrame(CSV.File("cog_metadata.csv",delim=","))
+cog_uk = DataFrame(CSV.File("/home4/2191618l/Github/Pango_Tree/cog_metadata.csv",delim=","))
 println("Lineage Meta Counts Loaded")
 
 count_dataframe = combine(groupby(cog_uk, [:usher_lineage]), nrow => :count)
@@ -200,11 +200,11 @@ max_count = filter( r -> r["# assigned"] ==  maximum(count_dataframe[!,"# assign
 pango_lineage_notes_url = "https://raw.githubusercontent.com/cov-lineages/pango-designation/master/lineage_notes.txt"
 pango_aliases_url = "https://raw.githubusercontent.com/cov-lineages/pango-designation/master/pango_designation/alias_key.json"
 
-download(pango_lineage_notes_url,"local_lineage_notes.tsv")
-download(pango_aliases_url,"local_aliases.json")
+download(pango_lineage_notes_url,"/home4/2191618l/Github/PangoTreeFiles/local_lineage_notes.tsv")
+download(pango_aliases_url,"/home4/2191618l/Github/PangoTreeFiles/local_aliases.json")
 
-lineages = DataFrame(CSV.File("local_lineage_notes.tsv",delim="\t"))[!,1]
-lineage_aliases = JSON.parse(open("local_aliases.json"))
+lineages = DataFrame(CSV.File("/home4/2191618l/Github/PangoTreeFiles/local_lineage_notes.tsv",delim="\t"))[!,1]
+lineage_aliases = JSON.parse(open("/home4/2191618l/Github/PangoTreeFiles/local_aliases.json"))
 filter!(p->(p[2] !=""),lineage_aliases)
 
 recombinant_lineages = [recombinant for recombinant in lineages if occursin("X", recombinant) == true]
@@ -258,13 +258,13 @@ output =Dict{String,Any}("name"=>"Root","alias"=>"Root","children"=>[node_dict["
 # Add Recombinants to Node Dict
 
 using JSON
-open("julia_lineages.json","w") do f
+open("/home4/2191618l/Github/PangoTreeFiles/julia_lineages.json","w") do f
     JSON.print(f,output)
 end
 
 node_dict_list = collect(values(node_dict))
 using JSON
-open("node_list.json","w") do f
+open("/home4/2191618l/Github/PangoTreeFiles/node_list.json","w") do f
     JSON.print(f,node_dict_list)
 end
 
@@ -331,6 +331,6 @@ for (key,values) in merge(recombinant_parents,recombinant_children)
         end
     end
 end
-open("recombinant_graphs.json","w") do f
+open("/home4/2191618l/Github/PangoTreeFiles/recombinant_graphs.json","w") do f
     JSON.print(f,graph)
 end
