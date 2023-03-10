@@ -198,7 +198,7 @@ count_dataframe = combine(groupby(cog_uk, [:usher_lineage]), nrow => :count)
 rename!(count_dataframe,["Lineage","# assigned"])
 sort!(count_dataframe,"# assigned",rev=true)
 
-max_count = filter( r -> r["# assigned"] ==  maximum(count_dataframe[!,"# assigned"]),count_dataframe  )
+max_count = filter( r -> r["# assigned"] ==  maximum(count_dataframe[!,"# assigned"]),count_dataframe  )[!,2]
 
 pango_lineage_notes_url = "https://raw.githubusercontent.com/cov-lineages/pango-designation/master/lineage_notes.txt"
 pango_aliases_url = "https://raw.githubusercontent.com/cov-lineages/pango-designation/master/pango_designation/alias_key.json"
@@ -338,4 +338,7 @@ open("/home4/2191618l/Github/PangoTreeFiles/recombinant_graphs.json","w") do f
     JSON.print(f,graph)
 end
 
-variables =  Dict{String,Any}("max_estimated_count"=>node_row.Alias)
+variables =  Dict{String,Any}("max_estimated_count"=>max_count)
+open("/home4/2191618l/Github/PangoTreeFiles/variables.json","w") do f
+    JSON.print(f,variables)
+end
