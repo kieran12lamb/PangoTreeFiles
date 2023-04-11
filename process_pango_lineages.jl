@@ -302,21 +302,29 @@ for node in node_dict_list
     
 end
 
+println(recombinant_parents)
+
 graph = Dict([("nodes",[]),("links",[])])
-for (key,values) in merge(recombinant_parents,recombinant_children)
+for (key,values) in merge(recombinant_parents)
     if key == nothing
         println("Key labelled as nothing")
         println(values)
         continue
     end
     if occursin("X",key) && occursin(".",key) ==false
-        println("X")
+        println(key)
         push!(graph["nodes"],Dict([("id",key),("colour","orange")]))
     elseif occursin(".",key)
         push!(graph["nodes"],Dict([("id",key),("colour","red")]))
-    else
     end
-    
+end
+
+for (key,values) in merge(recombinant_children)
+    if key == nothing
+        println("Key labelled as nothing")
+        println(values)
+        continue
+    end
     for child in values
         push!(graph["links"], Dict([("source",key),("target",child)]))
         node_for_child=false
