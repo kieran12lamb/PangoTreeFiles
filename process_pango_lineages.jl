@@ -306,7 +306,8 @@ println(recombinant_parents)
 
 graph = Dict([("nodes",[]),("links",[])])
 for (key,values) in merge(recombinant_parents)
-    if key == nothing
+    println(key)
+    if key === nothing
         println("Key labelled as nothing")
         println(values)
         continue
