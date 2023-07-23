@@ -311,7 +311,7 @@ for (key,values) in merge(recombinant_parents)
         println("Key labelled as nothing")
         println(values)
     else
-        if  occursin(".",key) && occursin("X",key) == false
+        if occursin("X",key) &&  occursin(".",key)
             push!(graph["nodes"],Dict([("id",key),("colour","parent")]))
             for val in values
                 push!(graph["links"], Dict([("source",val),("target",key)])) 
@@ -334,7 +334,7 @@ for (key,values) in merge(recombinant_children)
                 end
             end
             if node_for_child == false
-                if occursin(".",child) && occursin("X",child) == true
+                if occursin(".",child)
                     push!(graph["nodes"],Dict([("id",child),("colour","child")]))
                 end
             end
@@ -343,7 +343,9 @@ for (key,values) in merge(recombinant_children)
 end
 #Add recombinant nodes 
 for recomb in recombinant_lineages
-    push!(graph["nodes"], Dict([("id",recomb),("colour","recombinant")]))
+    if occursin("X",key) &&  occursin(".",key) == false
+        push!(graph["nodes"], Dict([("id",recomb),("colour","recombinant")]))
+    end
 end
 open("/home4/2191618l/Github/PangoTreeFiles/recombinant_graphs.json","w") do f
     JSON.print(f,graph)
