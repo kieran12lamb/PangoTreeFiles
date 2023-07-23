@@ -326,6 +326,7 @@ for (key,values) in merge(recombinant_children)
         println(values)
     else
         for child in values
+
             push!(graph["links"], Dict([("source",key),("target",child)]))
             node_for_child=false
             for node in graph["nodes"]
@@ -334,7 +335,7 @@ for (key,values) in merge(recombinant_children)
                 end
             end
             if node_for_child == false
-                if occursin(".",child)
+                if occursin(".",child) && occursin("X",key) == true
                     push!(graph["nodes"],Dict([("id",child),("colour","child")]))
                 end
             end
