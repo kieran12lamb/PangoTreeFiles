@@ -349,6 +349,10 @@ for (key,values) in merge(recombinant_children)
         end
     end
 end
+#Add recombinant nodes 
+for recomb in recombinant_lineages
+    push!(graph["nodes"], Dict([("id",recomb),("colour","orange")]))
+end
 open("/home4/2191618l/Github/PangoTreeFiles/recombinant_graphs.json","w") do f
     JSON.print(f,graph)
 end
