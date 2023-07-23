@@ -343,7 +343,7 @@ for (key,values) in merge(recombinant_children)
 end
 #Add recombinant nodes 
 for recomb in recombinant_lineages
-    if occursin("X",key) &&  occursin(".",key) == false
+    if occursin("X",recomb) &&  occursin(".",recomb) == false
         push!(graph["nodes"], Dict([("id",recomb),("colour","recombinant")]))
     end
 end
