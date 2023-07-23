@@ -311,7 +311,7 @@ for (key,values) in merge(recombinant_parents)
         println("Key labelled as nothing")
         println(values)
     else
-        if occursin("X",key) &&  occursin(".",key)
+        if  occursin(".",key) && occursin("X",key) == false
             push!(graph["nodes"],Dict([("id",key),("colour","parent")]))
             for val in values
                 push!(graph["links"], Dict([("source",val),("target",key)])) 
