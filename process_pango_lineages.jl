@@ -311,13 +311,7 @@ for (key,values) in merge(recombinant_parents)
         println("Key labelled as nothing")
         println(values)
     else
-        if occursin("X",key) && occursin(".",key) ==false
-            println(key)
-            push!(graph["nodes"],Dict([("id",key),("colour","recombinant")]))
-            for val in values
-                push!(graph["links"], Dict([("source",val),("target",key)])) 
-            end
-        elseif occursin(".",key)
+        if occursin("X",key) &&  occursin(".",key)
             push!(graph["nodes"],Dict([("id",key),("colour","parent")]))
             for val in values
                 push!(graph["links"], Dict([("source",val),("target",key)])) 
@@ -335,15 +329,13 @@ for (key,values) in merge(recombinant_children)
             push!(graph["links"], Dict([("source",key),("target",child)]))
             node_for_child=false
             for node in graph["nodes"]
-                if child== node["id"]
-                    node_for_child == true
+                if child == node["id"]
+                    node_for_child = true
                 end
             end
             if node_for_child == false
                 if occursin(".",child)
                     push!(graph["nodes"],Dict([("id",child),("colour","child")]))
-                elseif occursin("X",child) && occursin(".",child) == false
-                    push!(graph["nodes"],Dict([("id",child),("colour","recombinant")]))
                 end
             end
         end
